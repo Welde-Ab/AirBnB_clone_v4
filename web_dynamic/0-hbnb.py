@@ -15,13 +15,14 @@ app = Flask(__name__)
 
 @app.teardown_appcontext
 def close_db(error):
-    """ Remove the current SQLAlchemy Session """
+    """Close database or file storage"""
     storage.close()
 
 
 @app.route('/0-hbnb', strict_slashes=False)
 def hbnb():
     """ HBNB is alive! """
+    """Generate page with popdown menu of states/cities"""
     states = storage.all(State).values()
     states = sorted(states, key=lambda k: k.name)
     st_ct = []
