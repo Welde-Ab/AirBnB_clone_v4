@@ -11,7 +11,7 @@ from uuid import uuid4
 app = Flask(__name__)
 # app.jinja_env.trim_blocks = True
 # app.jinja_env.lstrip_blocks = True
-
+app.url_map.strict_slashes = False
 
 @app.teardown_appcontext
 def close_db(error):
@@ -19,7 +19,7 @@ def close_db(error):
     storage.close()
 
 
-@app.route('/101-hbnb', strict_slashes=False)
+@app.route('/101-hbnb')
 def hbnb():
     """ HBNB is alive! """
     states = storage.all(State).values()
